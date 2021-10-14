@@ -32,7 +32,7 @@ app.use(express.json({ extended: true }))
 app.use('/api/products', require('./routes/products.js'))
 app.use('/api/users', require('./routes/users.js'))
 app.use('/api/auth', require('./routes/auth.js'))
-
+app.use('/api/orders', require('./routes/orders.js'))
 // 4. SERVIDOR
 
 app.listen(process.env.PORT, () => {
