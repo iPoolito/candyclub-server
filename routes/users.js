@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 const { check } = require('express-validator')
+const authorization = require('./../middlewares/authorization')
 
 const usersController = require('./../controllers/usersController')
 
@@ -29,7 +30,7 @@ router.post(
 /**
  * - SOLO LOS MISMOS USUARIOS PUEDEN ACTUALIZAR SUS DATOS
  */
-router.post('/adress', usersController.adress)
+router.post('/adress', authorization, usersController.adress)
 // DELETE - USER - BORRAR UN USUARIO
 /**
  * - SOLO LOS ADMINS PUEDEN BORRAR AL USUARIO

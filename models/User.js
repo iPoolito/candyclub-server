@@ -22,11 +22,11 @@ const UsersSchema = new mongoose.Schema(
       type: String
     },
     adress: {
-      street: String,
-      suburb: String,
-      cp: String,
-      town: String,
-      state: String
+      street: { type: String, default: '' },
+      suburb: { type: String, default: '' },
+      cp: { type: String, default: '' },
+      town: { type: String, default: '' },
+      state: { type: String, default: '' }
     },
     role: {
       type: String,

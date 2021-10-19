@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const { validationResult } = require('express-validator')
-const User = require('../models/Product')
+const User = require('../models/User')
 
 exports.createUser = async (req, res) => {
   // REVISIÓN DE VALIDACIONES
@@ -81,10 +81,9 @@ exports.createUser = async (req, res) => {
 }
 
 exports.adress = async (req, res) => {
-  const { adress, _id } = req.body
-  const { street, suburb, cp, town, state } = adress
-  console.log(street, suburb, cp, town, state, _id)
-
+  const _id = req.user.id
+  const { newAdress } = req.body
+  const { street, suburb, cp, town, state } = newAdress
   try {
     const updateAdress = await User.findByIdAndUpdate(
       _id,
@@ -98,8 +97,7 @@ exports.adress = async (req, res) => {
         }
       },
       { new: true }
-    )
-    console.log(updateAdress)
+    ).select('-hashedPassword')
     return res.json({
       data: updateAdress
     })
