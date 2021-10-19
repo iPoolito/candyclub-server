@@ -29,7 +29,7 @@ router.post(
 /**
  * - SOLO LOS MISMOS USUARIOS PUEDEN ACTUALIZAR SUS DATOS
  */
-
+router.post('/adress', usersController.adress)
 // DELETE - USER - BORRAR UN USUARIO
 /**
  * - SOLO LOS ADMINS PUEDEN BORRAR AL USUARIO

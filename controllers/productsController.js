@@ -99,3 +99,22 @@ exports.deleteProduct = async (req, res) => {
     })
   }
 }
+
+exports.getFeaturedProducts = async (req, res) => {
+  try {
+    const products = await Product.find({ featured: true })
+
+    console.log(products)
+
+    return res.json({
+      data: products
+    })
+  } catch (error) {
+    console.log(error)
+
+    return res.status(500).json({
+      data: null,
+      errorMsg: 'Hubo un error interno. Estamos arreglándolo lo más pronto posible.'
+    })
+  }
+}

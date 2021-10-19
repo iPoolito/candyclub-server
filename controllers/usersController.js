@@ -4,8 +4,7 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const { validationResult } = require('express-validator')
-
-const User = require('./../models/User')
+const User = require('../models/Product')
 
 exports.createUser = async (req, res) => {
   // REVISIÓN DE VALIDACIONES
@@ -77,6 +76,37 @@ exports.createUser = async (req, res) => {
 
     res.status(500).json({
       msgError: 'Hubo un problema creando el usuario.'
+    })
+  }
+}
+
+exports.adress = async (req, res) => {
+  const { adress, _id } = req.body
+  const { street, suburb, cp, town, state } = adress
+  console.log(street, suburb, cp, town, state, _id)
+
+  try {
+    const updateAdress = await User.findByIdAndUpdate(
+      _id,
+      {
+        adress: {
+          street,
+          suburb,
+          cp,
+          town,
+          state
+        }
+      },
+      { new: true }
+    )
+    console.log(updateAdress)
+    return res.json({
+      data: updateAdress
+    })
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      msgError: 'Hubo un error actualizando la direccions.'
     })
   }
 }

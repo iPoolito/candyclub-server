@@ -17,4 +17,7 @@ router.put('/update', productsController.updateProduct)
 // DELETE - PET - BORRAR UN PRODUCTO
 router.delete('/delete', productsController.deleteProduct)
 
+// GET - PETS - OBTENER PRODUCTOS FEATURE
+router.get('/get-featured', productsController.getFeaturedProducts)
+
 module.exports = router
