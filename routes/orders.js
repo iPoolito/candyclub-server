@@ -8,5 +8,6 @@ const ordersController = require('./../controllers/ordersController')
 // CRUD
 // POST - Orden - CREAR UNA ORDEN
 router.post('/create-order', authorization, ordersController.createOrder)
+router.post('/pagar', authorization, ordersController.payment)
 
 module.exports = router
