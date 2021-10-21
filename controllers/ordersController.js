@@ -5,15 +5,14 @@ const User = require('./../models/User')
 const axios = require('axios')
 
 exports.createOrder = async (req, res) => {
+  console.log(req.body)
   try {
-    const { order } = req.body
-    const { products, buyer, buyerAddress } = order
+    const { products, buyer } = req.body
+    const idProducts = products?.map(el => el._id)
 
-    const idProducts = products.map(el => el._id)
+    const newOrder = await Order.create({ products: products, buyer: buyer })
 
-    const newOrder = await Order.create({ products: idProducts, buyer: buyer._id })
-
-    const UserOrder = await User.findByIdAndUpdate(buyer._id, { $push: { orders: newOrder._id }, adress: buyerAddress })
+    const UserOrder = await User.findByIdAndUpdate(buyer, { $push: { orders: newOrder._id } })
 
     return res.json({
       data: {
